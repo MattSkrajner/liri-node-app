@@ -47,10 +47,20 @@ var getSpotify = function(songName) {
 
 var getMovie = function(movieName) {
 
-request("http://www.omdbapi.com/?t=mr+nobody", function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log('body:', body); // Print the HTML for the Google homepage.
+request("http://www.omdbapi.com/?apikey=c6523de7&t=" + movieName + "&y=&plot=short&r=json", function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        var json = JSON.parse(body);
+
+        console.log("Title: " + json.Title);
+        console.log("Plot: " + json.Plot);
+        console.log("Year: " + json.Year);
+        console.log("Actors: " + json.Actors);
+        console.log("Rated: " + json.Rated);
+        console.log("Rotten Tomatoes Rating: " + json.tomatoRating);
+        console.log("IMDB Rating: " + json.imdbRating);
+        console.log("Country: " + json.Country);
+        console.log("Language: " + json.Language);
+    }
 });
 }
 
